@@ -69,7 +69,7 @@
     <nav class="navbar sticky-top bg-gray pb-0" id="0">
         <div class="container-fluid">
             <a class="navbar-brand text-crimson fw-bold bg-white px-3 rounded" href="/">f.</a>
-            <form class="d-flex" role="search" method="get" action="/home/search">
+            <form class="d-flex" role="search" method="get" action="/home/search" style="width: 250px;">
                 <input class="form-control me-2 bg-dark text-white" name="keyword" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-warning" type="submit">Search</button>
             </form>
