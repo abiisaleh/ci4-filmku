@@ -229,21 +229,20 @@ class Home extends BaseController
         // get IMDB ID
         $url = 'https://api.themoviedb.org/3/movie/' . $result['id'] . '/external_ids';
         $imdbid = $this->tmdbApi($url, $query)['imdb_id'];
-        d($imdbid);
 
         // tambahkan magnet dari yts.mx/api
-        $ytsurl = 'http://yts.mx/api/v2/movie_details.json';
-        $ytsquery = [
-            'imdb_id' => $imdbid
-        ];
+        // $ytsurl = 'http://yts.mx/api/v2/movie_details.json';
+        // $ytsquery = [
+        //     'imdb_id' => $imdbid
+        // ];
 
-        $client = \Config\Services::curlrequest();
-        $response = $client->request('GET', $ytsurl, ['query' => $ytsquery]);
-        $yts = $response->getBody();
-        $yts = json_decode($result, true);
+        // $client = \Config\Services::curlrequest();
+        // $response = $client->request('GET', $ytsurl, ['query' => $ytsquery]);
+        // $yts = $response->getBody();
+        // $yts = json_decode($result, true);
 
-        d($yts['data']['movie']['torrents'][0]['hash']);
-        d($yts['data']['movie']['title_long']); //encode
+        // d($yts['data']['movie']['torrents'][0]['hash']);
+        // d($yts['data']['movie']['title_long']); //encode
         // data['movie']['torrents']['hash'] //torrent hash
         // data['movie']['torrents']['quality']
         // data['movie']['torrents']['type']
@@ -260,8 +259,8 @@ class Home extends BaseController
             'key' => $this->key,
             'rating' => $rating,
             'genre' => $genre,
-            'yts_hash' => $yts['data']['movie']['torrents'][0]['hash'],
-            'yts_name' => urlencode($yts['data']['movie']['title_long'])
+            // 'yts_hash' => $yts['data']['movie']['torrents'][0]['hash'],
+            // 'yts_name' => urlencode($yts['data']['movie']['title_long'])
         ];
 
         return view('detail', $data);
