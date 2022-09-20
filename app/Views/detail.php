@@ -172,7 +172,7 @@
         // })
 
         client.add(torrentId, {
-            path: '/movie'
+            path: '/'
         }, function(torrent) {
             torrent.on('done', function() {
                 console.log('torrent download finished')
