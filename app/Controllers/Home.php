@@ -15,38 +15,74 @@ class Home extends BaseController
         return $result;
     }
 
-    public function index()
+    public function pager($totalReuslts)
     {
-        $movie = 'https://api.themoviedb.org/3/trending/movie/day';
-        $series = 'https://api.themoviedb.org/3/trending/tv/day';
-        $query = [
-            'api_key' => $this->key
-        ];
+        $pager = service('pager');
 
-        $data = [
-            'title' => 'filmku',
-            'nav' => 'trending',
-            'movie' => $this->tmdbApi($movie, $query)['results'],
-            'series' => $this->tmdbApi($series, $query)['results']
-        ];
+        $page = (int) ($this->request->getGet('page') ?? 1);
+        $perPage = 20;
+        $total = $totalReuslts;
 
-        return view('index', $data);
+        $pager_links = $pager->makeLinks($page, $perPage, $total, 'crimson');
+
+        return $pager_links;
     }
 
-    public function populer()
+    public function index()
     {
         $movie = 'https://api.themoviedb.org/3/discover/movie';
         $series = 'https://api.themoviedb.org/3/discover/tv';
         $query = [
             'api_key' => $this->key,
-            'vote_average.gte' => 8
+            'page' => $this->request->getGet('page'),
+            'include_adult' => false,
+            'certification_country' => 'US',
+            'certification.lte' => 'R'
         ];
 
+        $movieResult = $this->tmdbApi($movie, $query);
+        $seriesResult = $this->tmdbApi($series, $query);
+
+        if ($movieResult > $seriesResult) {
+            $totalReuslts = $movieResult['total_results'];
+        } else {
+            $totalReuslts = $seriesResult['total_results'];
+        }
+
         $data = [
-            'title' => 'filmku | Populer',
-            'nav' => 'populer',
-            'movie' => $this->tmdbApi($movie, $query)['results'],
-            'series' => $this->tmdbApi($series, $query)['results']
+            'title' => 'trending',
+            'movie' => $movieResult['results'],
+            'series' => $seriesResult['results'],
+            'pager_links' => $this->pager($totalReuslts)
+        ];
+
+        return view('index', $data);
+    }
+
+    public function topRated()
+    {
+        $movie = 'https://api.themoviedb.org/3/movie/top_rated';
+        $series = 'https://api.themoviedb.org/3/tv/top_rated';
+        $query = [
+            'api_key' => $this->key,
+            'page' => $this->request->getGet('page')
+        ];
+
+        $movieResult = $this->tmdbApi($movie, $query);
+        $seriesResult = $this->tmdbApi($series, $query);
+
+        if ($movieResult > $seriesResult) {
+            $totalReuslts = $movieResult['total_results'];
+        } else {
+            $totalReuslts = $seriesResult['total_results'];
+        }
+
+        $data = [
+            'title' => 'best',
+            'movie' => $movieResult['results'],
+            'series' => $seriesResult['results'],
+            'pager_links' => $this->pager($totalReuslts)
+
         ];
 
         return view('index', $data);
@@ -54,40 +90,82 @@ class Home extends BaseController
 
     public function genres()
     {
-        $genres = 'https://api.themoviedb.org/3/genre/movie/list';
+        $movie = 'https://api.themoviedb.org/3/genre/movie/list';
+        $series = 'https://api.themoviedb.org/3/genre/tv/list';
         $query = [
             'api_key' => $this->key
         ];
 
         $data = [
-            'title' => 'filmku | Genres',
-            'nav' => 'genre',
-            'genre' => $this->tmdbApi($genres, $query)['genres']
+            'title' => 'genre',
+            'movie' => $this->tmdbApi($movie, $query)['genres'],
+            'series' => $this->tmdbApi($series, $query)['genres']
         ];
 
         return view('genre', $data);
     }
 
-    function genre($name)
+    function genre($id)
     {
         $movie = 'https://api.themoviedb.org/3/discover/movie';
         $series = 'https://api.themoviedb.org/3/discover/tv';
         $query = [
             'api_key' => $this->key,
-            'with_genres' => $name
+            'page' => $this->request->getGet('page'),
+            'with_genres' => $id
         ];
 
+        $movieResult = $this->tmdbApi($movie, $query);
+        $seriesResult = $this->tmdbApi($series, $query);
+
+        if ($movieResult > $seriesResult) {
+            $totalReuslts = $movieResult['total_results'];
+        } else {
+            $totalReuslts = $seriesResult['total_results'];
+        }
+
         $data = [
-            'title' => 'filmku | ' . $name,
-            'nav' => 'genre',
-            'movie' => $this->tmdbApi($movie, $query)['results'],
-            'series' => $this->tmdbApi($series, $query)['results']
+            'title' => 'genre | ' . $id,
+            'movie' => $movieResult['results'],
+            'series' => $seriesResult['results'],
+            'pager_links' => $this->pager($totalReuslts)
         ];
 
         return view('index', $data);
     }
 
-    public function detail($type, $id)
+    public function search()
+    {
+        $keyword = $this->request->getVar('keyword');
+        $movie = 'https://api.themoviedb.org/3/search/movie';
+        $series = 'https://api.themoviedb.org/3/search/tv';
+        $query = [
+            'api_key' => $this->key,
+            'page' => $this->request->getGet('page'),
+            'query' => $keyword
+        ];
+
+        $movieResult = $this->tmdbApi($movie, $query);
+        $seriesResult = $this->tmdbApi($series, $query);
+
+        if ($movieResult > $seriesResult) {
+            $totalReuslts = $movieResult['total_results'];
+        } else {
+            $totalReuslts = $seriesResult['total_results'];
+        }
+
+        $data = [
+            'title' => 'trending',
+            'movie' => $movieResult['results'],
+            'series' => $seriesResult['results'],
+            'pager_links' => $this->pager($totalReuslts)
+
+        ];
+
+        return view('index', $data);
+    }
+
+    public function detail($type, $id, $seasonid = '')
     {
         $url = 'https://api.themoviedb.org/3/' . $type . '/' . $id;
         $query = [
@@ -102,61 +180,90 @@ class Home extends BaseController
         ];
 
         $result = $this->tmdbApi($url, $query);
+        $rating = $result['vote_average'];
+        $genre = $result['genres'];
+
+        if ($type == 'movie') {
+            $title = $result['title'];
+            $year = $result['release_date'];
+            $duration = $result['runtime'];
+        } elseif ($type == 'tv') {
+            // kalau season urlnya ada isi
+            if ($seasonid == '') {
+                $title = $result['name'];
+                $year = $result['first_air_date'];
+                $duration = 0;
+            } else {
+                $url = 'https://api.themoviedb.org/3/tv/' . $id . '/season' . '/' . $seasonid;
+                $result = $this->tmdbApi($url, $query);
+                $title = $result['name'];
+                $year = $result['air_date'];
+                $duration = 0;
+                $rating = 0.0;
+                $genre = null;
+            }
+        }
+
         $deskripsi = $this->tmdbApi($url, $queryIndo)['overview'];
 
         if ($deskripsi == '') {
             $deskripsi = $this->tmdbApi($url, $query)['overview'];
         }
 
-        if ($type == 'movie') {
-            $title = $result['title'];
-            $year = $result['release_date'];
-            $duration = $result['runtime'];
-        } else {
-            $title = $result['name'];
-            $year = $result['first_air_date'];
-            $duration = 0;
-        }
-
         //tambahkan season kalau series
         $season = '';
         if ($type == 'tv') {
-            $season = $result['seasons'];
+            if ($seasonid == '') {
+                $season = $result['seasons'];
+            } else {
+                $season = 'TRUE';
+            }
         }
 
+        // $web = new \spekulatius\phpscraper;
+
+        // $web->go('http://fmovies.to/home/');
+
+        // d($web->imagesWithDetails);
+
+        // get IMDB ID
+        $url = 'https://api.themoviedb.org/3/movie/' . $result['id'] . '/external_ids';
+        $imdbid = $this->tmdbApi($url, $query)['imdb_id'];
+        d($imdbid);
+
+        // tambahkan magnet dari yts.mx/api
+        $ytsurl = 'http://yts.mx/api/v2/movie_details.json';
+        $ytsquery = [
+            'imdb_id' => $imdbid
+        ];
+
+        $client = \Config\Services::curlrequest();
+        $response = $client->request('GET', $ytsurl, ['query' => $ytsquery]);
+        $yts = $response->getBody();
+        $yts = json_decode($result, true);
+
+        d($yts['data']['movie']['torrents'][0]['hash']);
+        d($yts['data']['movie']['title_long']); //encode
+        // data['movie']['torrents']['hash'] //torrent hash
+        // data['movie']['torrents']['quality']
+        // data['movie']['torrents']['type']
+        // data['movie']['torrents']['size']
+
         $data = [
-            'title' => 'filmku | ' . $title,
-            'result' => $result,
             'title' => $title,
+            'result' => $result,
             'year' => $year,
             'duration' => $duration,
             'deskripsi' => $deskripsi,
-            'season' => $season
+            'season' => $season,
+            'id' => $id,
+            'key' => $this->key,
+            'rating' => $rating,
+            'genre' => $genre,
+            'yts_hash' => $yts['data']['movie']['torrents'][0]['hash'],
+            'yts_name' => urlencode($yts['data']['movie']['title_long'])
         ];
 
         return view('detail', $data);
-    }
-
-    public function search()
-    {
-        $keyword = $this->request->getVar('keyword');
-        $movie = 'https://api.themoviedb.org/3/search/movie';
-        $series = 'https://api.themoviedb.org/3/search/tv';
-        $query = [
-            'api_key' => $this->key,
-            'query' => $keyword
-        ];
-
-        $resultMovie = $this->tmdbApi($movie, $query)['results'];
-        $resultSeries = $this->tmdbApi($series, $query)['results'];
-
-        $data = [
-            'title' => 'filmku',
-            'nav' => 'trending',
-            'movie' => $resultMovie,
-            'series' => $resultSeries
-        ];
-
-        return view('index', $data);
     }
 }

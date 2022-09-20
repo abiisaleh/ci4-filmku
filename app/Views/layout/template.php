@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= $title; ?></title>
+    <title>filmku | <?= ucfirst($title); ?></title>
 
     <!-- CSS CDN -->
     <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous"> -->
@@ -57,13 +57,52 @@
             --bs-pagination-disabled-bg: crimson;
             --bs-pagination-disabled-border-color: #c30025;
         }
+
+        .breadcrumb li a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .breadcrumb li a:hover {
+            color: crimson;
+        }
+
+        .nav-link:focus,
+        .nav-link:hover {
+            color: var(--bs-gray-400);
+        }
+
+        /* `xxl` applies to x-large devices (large desktops, less than 1400px) */
+        @media (max-width: 1399.98px) {
+            iframe {
+                height: 108px;
+                width: 328px;
+            }
+        }
+
+        @media (min-width: 1400px) {
+            .iframeDonasi {
+                height: 108px;
+                width: 366px;
+            }
+        }
+
+        .accordion {
+            --bs-accordion-color: gray;
+            --bs-accordion-bg: var(--bs-bg-dark);
+            --bs-accordion-border-color: var(--bs-bg-dark);
+            --bs-accordion-btn-color: crimson;
+            --bs-accordion-btn-bg: crimson;
+            --bs-accordion-active-color: var(--bs-warning);
+            --bs-accordion-active-bg: var(--bs-warning);
+        }
     </style>
 </head>
 
 <body class="bg-dark text-white">
     <header>
-        <div style="height: 30vh;">
-            <p class="text-center py-5">Bantu donasi buat beli kouta internet</p>
+        <div class="text-center" id="donasi" style="height: 30vh;">
+            <p class="mt-5">Bantu donasi buat beli kouta internet</p>
         </div>
     </header>
     <nav class="navbar sticky-top bg-gray pb-0" id="0">
@@ -80,6 +119,12 @@
     </nav>
 
     <main class="container my-3">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <?php $this->renderSection('breadcrumb'); ?>
+            </ol>
+        </nav>
         <?php $this->renderSection('content'); ?>
     </main>
 
@@ -122,6 +167,25 @@
     <!-- JavaScript Bundle with Popper -->
     <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script> -->
     <script src="/assets/js/bootstrap.bundle.min.js"></script>
-</body>
+
+    <script type='text/javascript' src='https://cdn.trakteer.id/js/embed/trbtn.min.js'></script>
+    <script type='text/javascript'>
+        (function() {
+            var trbtnId = trbtn.init('Dukung Saya di Trakteer', '#be1e2d', 'https://trakteer.id/abiisaleh/tip', 'https://cdn.trakteer.id/images/embed/trbtn-icon.png', '40');
+            trbtn.draw(trbtnId);
+
+            var trtbtnDiv = document.getElementById('trbtn-container-0');
+            document.getElementById('donasi').appendChild(trtbtnDiv);
+        })();
+    </script>
+
+    <script type='text/javascript'>
+        (function() {
+            var trtbtnDiv = document.querySelector('#trbtn-container-0');
+            document.querySelector('#donasi').appendChild(trtbtnDiv);
+        })();
+    </script>
+
+    <?php $this->renderSection('script'); ?>
 
 </html>
