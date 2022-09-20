@@ -158,17 +158,25 @@
         // Sintel, a free, Creative Commons movie
         // const torrentId = 'magnet:?xt=urn:btih:08ada5a7a6183aae1e09d831df6748d566095a10&dn=Sintel&tr=udp%3A%2F%2Fexplodie.org%3A6969&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6969&tr=udp%3A%2F%2Ftracker.empire-js.us%3A1337&tr=udp%3A%2F%2Ftracker.leechers-paradise.org%3A6969&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337&tr=wss%3A%2F%2Ftracker.btorrent.xyz&tr=wss%3A%2F%2Ftracker.fastcast.nz&tr=wss%3A%2F%2Ftracker.openwebtorrent.com&ws=https%3A%2F%2Fwebtorrent.io%2Ftorrents%2F&xs=https%3A%2F%2Fwebtorrent.io%2Ftorrents%2Fsintel.torrent'
 
-        const torrentId = 'magnet:?xt=urn:btih:784C259129A0C749881F4724570E2F0BFE11F797&amp;dn=Day%20Shift%20(2022)&amp;tr=udp%3A%2F%2Fglotorrents.pw%3A6969%2Fannounce&amp;tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80&amp;tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6969&amp;tr=udp%3A%2F%2Fp4p.arenabg.ch%3A1337&amp;tr=udp%3A%2F%2Ftracker.internetwarriors.net%3A1337'
+        const torrentId = 'magnet:?xt=urn:btih:<?= $yts_hash; ?>&dn=<?= $yts_name; ?>&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.leechers-paradise.org%3A6969%2Fannounce&tr=udp%3A%2F%2F9.rarbg.to%3A2710%2Fannounce&tr=udp%3A%2F%2Fp4p.arenabg.ch%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.cyberia.is%3A6969%2Fannounce&tr=http%3A%2F%2Fp4p.arenabg.com%3A1337%2Fannounce&tr=udp%3A%2F%2Fopen.tracker.cl%3A1337%2Fannounce&tr=wss%3A%2F%2Ftracker.btorrent.xyz&tr=wss%3A%2F%2Ftracker.openwebtorrent.com'
 
-        client.add(torrentId, function(torrent) {
-            // Torrents can contain many files. Let's use the .mp4 file
-            const file = torrent.files.find(function(file) {
-                return file.name.endsWith('.mp4')
+        // client.add(torrentId, function(torrent) {
+        //     // Torrents can contain many files. Let's use the .mp4 file
+        //     const file = torrent.files.find(function(file) {
+        //         return file.name.endsWith('.mp4')
+        //     })
+
+        //     // Display the file by adding it to the DOM.
+        //     // Supports video, audio, image files, and more!
+        //     file.appendTo('#stream')
+        // })
+
+        client.add(torrentId, {
+            path: '/movie'
+        }, function(torrent) {
+            torrent.on('done', function() {
+                console.log('torrent download finished')
             })
-
-            // Display the file by adding it to the DOM.
-            // Supports video, audio, image files, and more!
-            file.appendTo('#stream')
         })
     </script>
     <?php $this->endsection() ?>
