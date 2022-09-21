@@ -231,7 +231,7 @@ class Home extends BaseController
         $imdbid = $this->tmdbApi($url, $query)['imdb_id'];
 
         // tambahkan magnet dari yts.mx/api
-        $ytsurl = 'https://yts.mx/api/v2/movie_details.json';
+        $ytsurl = 'https://yts.torrentbay.to/api/v2/movie_details.json';
         $ytsquery = [
             'imdb_id' => $imdbid
         ];
