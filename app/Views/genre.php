@@ -11,10 +11,6 @@
 </ul>
 <?php $this->endSection() ?>
 
-<?php $this->section('breadcrumb'); ?>
-<li class="breadcrumb-item active" aria-current="page"><?= ucfirst($title); ?></li>
-<?php $this->endSection('breadcrumb'); ?>
-
 <?php $this->section('content') ?>
 <div>
     <ul class="text-center nav justify-content-center">

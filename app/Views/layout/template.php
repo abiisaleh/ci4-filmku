@@ -119,17 +119,11 @@
     </nav>
 
     <main class="container my-3">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Home</a></li>
-                <?php $this->renderSection('breadcrumb'); ?>
-            </ol>
-        </nav>
         <?php $this->renderSection('content'); ?>
     </main>
 
     <footer class="bg-gray p-3">
-        <p class="text-center">filmku by abiisaleh • 2022</p>
+        <p class="text-center">filmku by abiisaleh, gibe, stev • 2022</p>
         <!-- sosmed -->
         <ul class="nav justify-content-between col-3 col-sm-1 mx-auto">
             <li>

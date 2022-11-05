@@ -11,16 +11,6 @@
 </ul>
 <?php $this->endSection() ?>
 
-<?php $this->section('breadcrumb'); ?>
-<?php if (str_word_count($title) == 1) : ?>
-    <li class="breadcrumb-item active"><?= ucfirst(explode(' | ', $title)[0]); ?></li>
-<?php else : ?>
-    <li class="breadcrumb-item"><a href="/home/genre"><?= ucfirst(explode(' | ', $title)[0]); ?></a></li>
-    <li class="breadcrumb-item active" aria-current="page"><?= ucfirst(explode(' | ', $title)[1]); ?></li>
-<?php endif; ?>
-
-<?php $this->endSection('breadcrumb'); ?>
-
 <?php $this->section('content') ?>
 <div>
     <ul class="text-center nav justify-content-center">
