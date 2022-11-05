@@ -220,10 +220,6 @@ class Home extends BaseController
             }
         }
 
-        // get IMDB ID
-        $url = 'https://api.themoviedb.org/3/movie/' . $result['id'] . '/external_ids';
-        $imdbid = $this->tmdbApi($url, $query)['imdb_id'];
-
         $data = [
             'title' => $title,
             'result' => $result,
