@@ -112,11 +112,13 @@
 
                     <div class="col-12">
                         <?php
-                        if (isset($result['videos']['results'][0]['key'])) {
-                            echo '<iframe src="https://www.youtube.com/embed/' . $result['videos']['results'][0]['key'] . '" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" style="width: 100%; height: 25vh;" allowfullscreen></iframe>';
-                        } else {
-                            echo '';
+                        foreach ($result['videos']['results'] as $trailer) {
+                            if ($trailer['type'] == "Trailer") {
+                                $trailerVideo = $trailer;
+                            }
                         }
+                        if($trailerVideo != null)
+                            echo '<iframe src="https://www.youtube.com/embed/' . $trailerVideo['key'] . '" title="'.$trailerVideo['name'].'" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" style="width: 100%; height: 25vh;" allowfullscreen></iframe>';
                         ?>
                     </div>
                 </div>
