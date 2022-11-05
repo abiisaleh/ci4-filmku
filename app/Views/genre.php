@@ -52,7 +52,7 @@
         <div class="row my-5 py-3">
             <div class="col text-center">
                 <?php foreach ($movie as $genres) : ?>
-                    <a href="/home/genre/<?= $genres['name']; ?>" class="btn btn-outline-danger m-1"><?= $genres['name']; ?></a>
+                    <a href="/home/genre/<?= $genres['id']; ?>" class="btn btn-outline-danger m-1"><?= $genres['name']; ?></a>
                 <?php endforeach; ?>
             </div>
         </div>
@@ -62,7 +62,7 @@
         <div class="row my-5 py-3">
             <div class="col text-center">
                 <?php foreach ($movie as $genres) : ?>
-                    <a href="/home/genre/<?= $genres['name']; ?>" class="btn btn-outline-danger m-1"><?= $genres['name']; ?></a>
+                    <a href="/home/genre/<?= $genres['id']; ?>" class="btn btn-outline-danger m-1"><?= $genres['name']; ?></a>
                 <?php endforeach; ?>
             </div>
         </div>
