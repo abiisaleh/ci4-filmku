@@ -59,7 +59,7 @@
                         <?php if (!isset($movie['poster_path'])) : ?>
                             <img src="/img/noimage.png" class="card-img-top" alt="judul">
                         <?php else : ?>
-                            <img src="https://image.tmdb.org/t/p/original<?= $movie['poster_path']; ?>" class="card-img-top" alt="judul">
+                            <img src="https://image.tmdb.org/t/p/w300<?= $movie['poster_path']; ?>" class="card-img-top" alt="judul">
                         <?php endif; ?>
                     </a>
                     <div class="card-body p-1">
@@ -88,7 +88,7 @@
                         <?php if ($series['poster_path'] == null) : ?>
                             <img src="/img/noimage.png" class="card-img-top" alt="judul">
                         <?php else : ?>
-                            <img src="https://image.tmdb.org/t/p/original<?= $series['poster_path']; ?>" class="card-img-top" alt="judul">
+                            <img src="https://image.tmdb.org/t/p/w300<?= $series['poster_path']; ?>" class="card-img-top" alt="judul">
                         <?php endif ?>
                     </a>
                     <div class="card-body p-1">
