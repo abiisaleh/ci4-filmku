@@ -105,7 +105,7 @@
             <p class="mt-5">Bantu donasi buat beli kouta internet</p>
         </div>
     </header>
-    <nav class="navbar sticky-top bg-gray pb-0" id="0">
+    <nav class="navbar sticky-top bg-gray pb-2" id="0">
         <div class="container-fluid">
             <a class="navbar-brand text-crimson fw-bold bg-white px-3 rounded" href="/">f.</a>
             <form class="d-flex" role="search" method="get" action="/home/search" style="width: 250px;">

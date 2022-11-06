@@ -117,8 +117,9 @@
                                 $trailerVideo = $trailer;
                             }
                         }
-                        if($trailerVideo != null)
+                        if(isset($trailerVideo)) {
                             echo '<iframe src="https://www.youtube.com/embed/' . $trailerVideo['key'] . '" title="'.$trailerVideo['name'].'" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" style="width: 100%; height: 25vh;" allowfullscreen></iframe>';
+                        }
                         ?>
                     </div>
                 </div>
