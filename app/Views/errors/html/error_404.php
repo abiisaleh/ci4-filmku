@@ -163,23 +163,4 @@
     <!-- JavaScript Bundle with Popper -->
     <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script> -->
     <script src="/assets/js/bootstrap.bundle.min.js"></script>
-
-    <script type='text/javascript' src='https://cdn.trakteer.id/js/embed/trbtn.min.js'></script>
-    <script type='text/javascript'>
-        (function() {
-            var trbtnId = trbtn.init('Dukung Saya di Trakteer', '#be1e2d', 'https://trakteer.id/abiisaleh/tip', 'https://cdn.trakteer.id/images/embed/trbtn-icon.png', '40');
-            trbtn.draw(trbtnId);
-
-            var trtbtnDiv = document.getElementById('trbtn-container-0');
-            document.getElementById('donasi').appendChild(trtbtnDiv);
-        })();
-    </script>
-
-    <script type='text/javascript'>
-        (function() {
-            var trtbtnDiv = document.querySelector('#trbtn-container-0');
-            document.querySelector('#donasi').appendChild(trtbtnDiv);
-        })();
-    </script>
-
 </html>
