@@ -94,16 +94,18 @@ pb-2
                                             <?php endif ?>
                                         </a>
                                         <div class="card-body p-1">
-                                            <h6 class="card-title"><?= $seasons['name']; ?></h6>
-                                            <p class="card-text text-white-50">
-                                                <?= $seasons['episode_count'] ?> E -
-                                                <?php
+                                            <h6 class="card-title"><?= $seasons['name']; ?> - 
+                                            <?php
                                                 if (isset($seasons['air_date'])) {
                                                     echo explode('-', $seasons['air_date'])[0];
                                                 } else {
                                                     echo '-';
                                                 }
-                                                ?>
+                                            ?>
+                                            </h6>
+                                            <p class="card-text text-white-50">
+                                                <?= $seasons['episode_count'] ?> E - IDR 
+                                                <?= ($seasons['episode_count'] > 10) ? number_format($seasons['episode_count']*5000) : number_format($seasons['episode_count']*10000) ?>
                                             </p>
                                         </div>
                                     </div>
