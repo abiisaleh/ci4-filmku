@@ -13,13 +13,23 @@ pb-2
                     <img src="https://image.tmdb.org/t/p/original<?= $result['poster_path']; ?>" class="card-img-top" alt="<?= ($result['title'] = null) ? $result['name'] : $result['title']; ?>" height="100%">
                     <div class="card-body bg-crimson rounded-bottom">
                         <div class="d-grid gap-2 col-8 mx-auto">
-                            <a href="https://wa.me/6282238204776?text=<?= urlencode($title.' ('.explode('-',$year)[0].')') ?>" class="btn btn-warning">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
-                                    <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
-                                    <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
-                                </svg>
-                                <span class="mx-1">Pesan</span>
-                            </a>
+                            <?php if ($season == 'TRUE') : ?>
+                                <a href="#daftarSeason" class="btn btn-warning">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                                        <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                                        <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+                                    </svg>
+                                    <span class="mx-1">Pesan</span>
+                                </a>
+                            <?php else : ?>   
+                                <a href="https://wa.me/6282238204776?text=<?= urlencode($title.' ('.explode('-',$year)[0].')') ?>" class="btn btn-warning">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                                        <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                                        <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+                                    </svg>
+                                    <span class="mx-1">Pesan</span>
+                                </a>
+                            <?php endif;?>   
                         </div>
                     </div>
                 </div>
@@ -83,10 +93,10 @@ pb-2
                                 </div>
                             </div>
                         <?php else : ?>
-                            <div class="row d-flex my-5">
+                            <div class="row d-flex my-5" id="daftarSeason">
                                 <?php foreach ($season as $seasons) : ?>
                                     <div class="card col-md-2 col-sm-3 col-6 mb-3">
-                                        <a href="https://wa.me/6282238204776?text=<?= urlencode($title.' Season '.$seasons['season_number'].' ('.explode('-',$year)[0].')') ?> <?= $result['id']; ?>/">
+                                        <a href="https://wa.me/6282238204776?text=<?= urlencode($title.' Season '.$seasons['season_number'].' ('.explode('-',$year)[0].')') ?>">
                                             <?php if ($seasons['poster_path'] == null) : ?>
                                                 <img src="/img/noimage.png" class="card-img-top" alt="judul">
                                             <?php else : ?>
