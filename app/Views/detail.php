@@ -1,5 +1,9 @@
 <?php $this->extend('layout/template') ?>
 
+<?php $this->section('padding') ?>
+pb-2
+<?php $this->endSection('padding') ?>
+
 <?php $this->section('content') ?>
 <div class="tab-content my-4" id="myTabContent">
     <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">

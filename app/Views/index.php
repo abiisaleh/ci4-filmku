@@ -1,5 +1,9 @@
 <?php $this->extend('layout/template') ?>
 
+<?php $this->section('padding') ?>
+pb-0
+<?php $this->endSection('padding') ?>
+
 <?php $this->section('tabs') ?>
 <ul class="nav nav-tabs" id="myTab" role="tablist">
     <li class="nav-item" role="presentation">
