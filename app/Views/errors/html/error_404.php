@@ -100,11 +100,6 @@
 </head>
 
 <body class="bg-dark text-white">
-    <header>
-        <div class="text-center" id="donasi" style="height: 30vh;">
-            <p class="mt-5">Bantu donasi buat beli kouta internet</p>
-        </div>
-    </header>
     <nav class="navbar sticky-top bg-gray pb-2" id="0">
         <div class="container-fluid">
             <a class="navbar-brand text-crimson fw-bold bg-white px-3 rounded" href="/">f.</a>
@@ -115,7 +110,7 @@
         </div>
     </nav>
 
-    <main class="container my-3" style="height: 30vh">
+    <main class="container my-3" style="height: 60vh">
         <div class="text-center mt-5">
             <h1>Kamu Tersesat 😭</h1>
 
