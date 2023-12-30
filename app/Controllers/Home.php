@@ -4,7 +4,12 @@ namespace App\Controllers;
 
 class Home extends BaseController
 {
-    protected $key = '451a8659289b87fe4a6b3cde9fe4b93e'; //TMDB API
+    protected string $key;
+
+    public function __construct()
+    {
+        $this->key = env('TMDBKey');
+    }
 
     private function tmdbApi($url, $query = [])
     {
